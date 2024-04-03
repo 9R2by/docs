@@ -1,0 +1,13 @@
+sudo apt install signify-openbsd
+
+signify-openbsd -G -p key.pub -s keys/key.sec
+
+sha256sum *
+
+sha256sum -b * > SHA256.txt
+
+sha256sum -c SHA256.txt
+
+signify-openbsd -S -s keys/key.sec -m SHA256.txt -x SHA256.txt.sig
+
+signify-openbsd -V -p key.pub -m SHA256.txt
